@@ -23,7 +23,9 @@ app.use("/api/v1/users", userRoutes);
 
 const start = async () => {
     app.set("mongo_user")
-    const connectionDb = await mongoose.connect("mongodb://127.0.0.1:27017/pulsemeet")
+    const connectionDb = await mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/pulsemeet"
+);
 
     console.log(`MONGO Connected DB HOst: ${connectionDb.connection.host}`)
     server.listen(app.get("port"), () => {
